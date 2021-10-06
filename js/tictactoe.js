@@ -10,6 +10,8 @@ let gameCounter = 0;
 let $player1 = '';
 let $player2 = '';
 
+let gameOver = false;
+
 $(document).ready(function() {
 
 const resetBoard = function() {
@@ -17,6 +19,10 @@ const resetBoard = function() {
     $('.grid').removeClass('X O cat1 cat2');
     $('.grid').text('');
     gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
+    gameOver = false;
+    if ($('#a1').hasClass('cpu') && player === 1) {
+      computerTurn();
+    }
   }, 1000);
 };
 
@@ -67,12 +73,14 @@ const checkWin = function () {
          gameCounter = 0;
          $('#winner').text(`Congratulations ${$player1}!`);
          $('#winner').css('color', 'blue');
+         gameOver = true;
          resetBoard();
        } else {
          player2Score = player2Score + 1;
          gameCounter = 0;
          $('#winner').text(`Congratulations ${$player2}!`);
          $('#winner').css('color', 'red');
+         gameOver = true;
          resetBoard();
        }
   };
@@ -81,6 +89,7 @@ const checkWin = function () {
     gameCounter = 0;
     $('#winner').text(`Game is tied!`);
     $('#winner').css('color', 'purple');
+    gameOver = true;
     resetBoard();
   }
   $('#firstPlayer').text($player1 + ': ' + player1Score);
@@ -105,6 +114,9 @@ $('.grid').on('click', function() {
       gameBoard[choice] = 'X';
       checkWin();
       player = 1;
+      if ($(this).hasClass('cpu') && gameOver === false) {
+        computerTurn();
+      }
     } else {
       $(this).text('O');
       $(this).addClass('O');
