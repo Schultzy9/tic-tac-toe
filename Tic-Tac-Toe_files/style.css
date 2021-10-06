@@ -9,8 +9,7 @@
 
 body {
   font-family: 'Permanent Marker', cursive;
-  background-color: black;
-  color: white;
+  background-color: limegreen;
 }
 
 nav{
@@ -45,23 +44,20 @@ nav{
 }
 
 .container {
-  background-color: black;
-  max-width: 960px;
-  min-width: 300px;
+  background-color: limegreen;
+  width: 960px;
+  min-height: 100vh;
   margin: 0 auto;
   text-align: center;
-  padding-top: 30px;
 }
 
 h1 {
   font-size: 400%;
-  padding-bottom: 20px;
 }
 
 table {
   width: 450px;
   height: 450px;
-  padding-right: 30px;;
 }
 
 td {
@@ -70,7 +66,7 @@ td {
 }
 
 table button {
-  background-color: black;
+  background-color: limegreen;
   text-align: center;
   display: inline-block;
   font-size: 100px;
@@ -80,83 +76,78 @@ table button {
 }
 
 #a1 {
-  border-bottom: 4px solid white;
-  border-right: 4px solid white;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
 }
 
 #a2 {
-  border-bottom: 4px solid white;
-  border-left: 4px solid white;
-  border-right: 4px solid white;
+  border-bottom: 4px solid black;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
 }
 
 #a3 {
-  border-bottom: 4px solid white;
-  border-left: 4px solid white;
+  border-bottom: 4px solid black;
+  border-left: 4px solid black;;
 }
 
 #b1 {
-  border-top: 4px solid white;
-  border-bottom: 4px solid white;
-  border-right: 4px solid white;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
 }
 
 #b2 {
-  border: 4px solid white;
+  border: 4px solid black;
 }
 
 #b3 {
-  border-top: 4px solid white;
-  border-bottom: 4px solid white;
-  border-left: 4px solid white;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  border-left: 4px solid black;;
 }
 
 #c1 {
-  border-top: 4px solid white;
-  border-right: 4px solid white;
+  border-top: 4px solid black;
+  border-right: 4px solid black;
 }
 
 #c2 {
-  border-top: 4px solid white;
-  border-left: 4px solid white;
-  border-right: 4px solid white;
+  border-top: 4px solid black;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
 }
 
 #c3 {
-  border-top: 4px solid white;
-  border-left: 4px solid white;
+  border-top: 4px solid black;
+  border-left: 4px solid black;;
 }
 
 
 .main {
+  width: 60%;
   display: inline-block;
 }
 
 .scorecard {
-  width: 40%;
+  width: 35%;
   display: inline-block;
   vertical-align: top;
   font-size: 150%;
   text-align: left;
-  line-height: 2;
-}
-
-.scorecard a {
-
+  line-height: 0.8;
 }
 
 .X {
-  color: red;
+  color: blue;
 }
 
 .O {
-  color: green;
+  color: red;
 }
 
 #winner {
   color: purple;
-  text-align:left;
-  padding-left: 30px;
 }
 
 
@@ -190,34 +181,33 @@ table button {
 }
 
 
-body .cat-game {
+.cat-game .container {
   background-color: pink;
   animation-name: cat-background;
   animation-duration: 10s;
   animation-iteration-count: infinite;
-  min-height: 98vh;
 }
 
- .cat-game .container {
-   background-color: pink;
-   animation-name: cat-background;
-   animation-duration: 10s;
-   animation-iteration-count: infinite;
-   min-height: 98vh;
- }
-
-h1, a .catgame {
+/* .cat-game h1, a {
   color: purple;
   animation-name: cat-text;
   animation-duration: 2s;
   animation-iteration-count: infinite;
-}
+} */
 
-.cat-game table button{
+/* .cat-game a {
+  font-size: 150%;
+} */
+
+.cat-game table button {
   background-color: pink;
   animation-name: cat-background;
   animation-duration: 5s;
   animation-iteration-count: infinite;
+}
+
+.kitty {
+  background-color: pink;
 }
 
 .cat1 {

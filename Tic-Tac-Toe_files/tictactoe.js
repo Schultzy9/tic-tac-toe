@@ -33,24 +33,6 @@ const checkCatGame = function () {
   }
 }
 
-const computerTurn = function() {
-  let number = Math.floor(Math.random() * 9);
-  let compChoice = gameBoard[number];
-  while (compChoice === 'X'|| compChoice === 'O') {
-    number = Math.floor(Math.random() * 9);
-    compChoice = gameBoard[number];
-  }
-  $(`#${compChoice}`).text('O');
-  $(`#${compChoice}`).addClass('O');
-  if ($(`#${compChoice}`).hasClass('kitty') === true) {
-    $(`#${compChoice}`).addClass('cat2');
-    $(`#${compChoice}`).text('');
-  }
-  gameBoard[number] = 'O';
-  checkWin();
-  player = 0;
-}
-
 const checkWin = function () {
   gameCounter = gameCounter + 1;
   if (gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2] ||
@@ -97,7 +79,6 @@ $('.grid').on('click', function() {
       $(this).text('X');
       $(this).addClass('X');
       if ($(this).hasClass('kitty') === true) {
-        $('body').addClass('kitty');
         $(this).addClass('cat1');
         $(this).text('');
       }
