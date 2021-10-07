@@ -16,10 +16,11 @@
         <h4>Tic-Tac-Toe</h4>
       </div>
       <ul class='nav-links'>
-          <li><a href='index.html'>vs Player</a></li>
-          <li><a href='vcomputer.html'>vs Computer</a></li>
+        <li><a id='vs-player' href='index.html'>vs Player</a></li>
+        <li><a id='vs-computer' href='vcomputer.html'>vs Computer</a></li>
   </nav>
 
+  <div class='cpu-game'>
   <div class='container'>
 
     <div class='main'>
@@ -40,15 +41,19 @@
       <h3>Enter your names</h3>
       <p>X: <input class='names' id="player1" type="text" placeholder="Player 1"></input></p>
       <p>O: <input class='names' id="player2" type="text" placeholder="Computer"></input></p>
+      <p><button id='save'>Save Names</button><p>
       <h3>Current Score</h3>
       <p id='firstPlayer'>Player 1: 0</p>
       <p id='secondPlayer'>Computer: 0</p>
       <p id='ties'>Ties: 0</p>
+      <p><button id='clear'>Clear Scores</button></p>
     </div>
 
   <h1 id='winner'></h1>
 
   </div>
+  </div>
 
 </body>
+
 </html>

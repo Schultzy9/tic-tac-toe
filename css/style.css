@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Permanent Marker', cursive;
-  background-color: black;
+  background-color: navy;
   color: white;
 }
 
@@ -40,12 +40,24 @@ nav{
   font-size: 18px;
 }
 
+#vs-computer {
+  color: maroon;
+}
+
+#vs-computer:hover, #vs-player:hover {
+  font-size: 120%;
+}
+
+#vs-player {
+  color: navy;
+}
+
 .nav-links li {
   list-style: none;
 }
 
 .container {
-  background-color: black;
+  background-color: navy;
   max-width: 960px;
   min-width: 300px;
   margin: 0 auto;
@@ -70,7 +82,7 @@ td {
 }
 
 table button {
-  background-color: black;
+  background-color: navy;
   text-align: center;
   display: inline-block;
   font-size: 100px;
@@ -159,7 +171,28 @@ table button {
   padding-left: 30px;
 }
 
+body .cpu-game {
+  background-color: maroon;
+}
 
+.cpu-game .container {
+  background-color: maroon;
+  min-height: 92vh;
+}
+
+.cpu-game table button{
+  background-color: maroon;
+}
+
+.terminator {
+  background-image: url('../images/terminator.gif');
+  background-size: 150px 150px;
+}
+
+.ape {
+  background-image: url('../images/ape.gif');
+  background-size: 150px 150px;
+}
 
 
 
@@ -206,7 +239,7 @@ body .cat-game {
    min-height: 98vh;
  }
 
-h1, a .catgame {
+.catgame h1 a {
   color: purple;
   animation-name: cat-text;
   animation-duration: 2s;
