@@ -23,6 +23,7 @@ const machine = new Audio('audio/machinewins.wav');
 
 $(document).ready(function() {
 
+//Store scores in local storage
 const saveScores = function () {
   if ($('#a1').hasClass('cpu')) {
     localStorage.setItem('player1ScoreCPU', player1ScoreCPU);
@@ -35,7 +36,9 @@ const saveScores = function () {
   }
 }
 
+//Displays scores on screen from local storage
 const getScores = function () {
+  //Computer Game
   if ($('#a1').hasClass('cpu')) {
     player1ScoreCPU = parseInt(localStorage.getItem('player1ScoreCPU', player1ScoreCPU));
     if ( isNaN(player1ScoreCPU) === true) {
@@ -52,6 +55,7 @@ const getScores = function () {
     $('#firstPlayerCPU').text($player1CPU + ': ' + player1ScoreCPU);
     $('#secondPlayerCPU').text($player2CPU + ': ' + player2ScoreCPU)
     $('#tiesCPU').text('Ties: ' + tiedScoreCPU);
+    //Player Game
   } else {
     player1Score = parseInt(localStorage.getItem('player1Score', player1Score));
     if ( isNaN(player1Score) === true) {
@@ -71,10 +75,13 @@ const getScores = function () {
   }
 }
 
+//Saves players to local storage
 const savePlayers = function() {
+  //computer game
   if ($('#a1').hasClass('cpu')) {
     $player1CPU = $('#player1CPU').val();
     localStorage.setItem('player 1CPU', $player1CPU);
+  //player game
   } else {
     $player1 = $('#player1').val();
     $player2 = $('#player2').val();
@@ -83,7 +90,9 @@ const savePlayers = function() {
   }
 }
 
+//Displays players and scores on the screen
 const setPlayers = function() {
+  //computer game
   if ($('#a1').hasClass('cpu')) {
     $player1CPU = localStorage.getItem('player 1CPU');
     if ($player1CPU === null) {
@@ -93,6 +102,7 @@ const setPlayers = function() {
     $('#secondPlayerCPU').text($player2CPU + ': ' + player2ScoreCPU)
     $('#tiesCPU').text('Ties: ' + tiedScoreCPU);
   } else {
+  //player game
     $player1 = localStorage.getItem('player 1');
     if ($player1 === null) {
       $player1 = 'Player 1';
@@ -107,10 +117,11 @@ const setPlayers = function() {
   }
 }
 
+//Resets the Game Board so that a new game can be played and displays winner of previous game
 const resetBoard = function() {
   saveScores();
   setTimeout(function() {
-    $('.grid').removeClass('X O cat1 cat2 terminator ape');
+    $('.grid').removeClass('X O cat1 cat2 bender ape');
     $('.grid').text('');
     gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
     gameOver = false;
@@ -123,13 +134,15 @@ const resetBoard = function() {
   }, 2000);
 };
 
+//Checks for Meow-Meow-Meow Easter Egg
 const checkCatGame = function () {
   if ($player1 === 'Meow' && $player2 === 'Meow-Meow') {
-    $('#winner').addClass('cat-game');
-    $('#winner').html('<a href="cat-tic-tac-toe.html">Click here to play Meow-Meow-Meow<a>');
+    $('#winner').addClass('cat-game-link');
+    $('#winner').html('<a href="meow-meow-meow.html">Click here to play Meow-Meow-Meow! Not safe for those with photosensitive epilepsy<a>');
   }
 }
 
+//Computer chooses random available square on the board
 const computerTurn = function() {
   let number = Math.floor(Math.random() * 9);
   let compChoice = gameBoard[number];
@@ -138,7 +151,7 @@ const computerTurn = function() {
     compChoice = gameBoard[number];
   }
   $(`#${compChoice}`).text('');
-  $(`#${compChoice}`).addClass('terminator');
+  $(`#${compChoice}`).addClass('bender');
   $(`#${compChoice}`).addClass('O');
   if ($(`#${compChoice}`).hasClass('kitty') === true) {
     $(`#${compChoice}`).addClass('cat2');
@@ -150,6 +163,7 @@ const computerTurn = function() {
   player = 0;
 }
 
+//Check if the move made by the computer or the player wins the game
 const checkWin = function () {
   gameCounter = gameCounter + 1;
   if (gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2] ||
@@ -259,10 +273,8 @@ $('.grid').on('click', function() {
   }
 });
 
+//Load screen with previous player names and scores.
 getScores();
 setPlayers();
 
 });
-
-//README file
-//Smart AI

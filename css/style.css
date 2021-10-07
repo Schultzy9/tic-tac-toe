@@ -190,8 +190,8 @@ body .cpu-game {
   background-color: #590809;
 }
 
-.terminator {
-  background-image: url('../images/terminator.gif');
+.bender {
+  background-image: url('../images/bender.gif');
   background-size: 150px 150px;
 }
 
@@ -222,7 +222,7 @@ body .cpu-game {
 
 @keyframes cat-text {
   0%   {color: red;}
-  25%  {color: blue;}
+  25%  {color: green;}
   50%  {color: black;}
   75% {color: white;}
   100% {color: red;}
@@ -245,7 +245,7 @@ body .cat-game {
    min-height: 98vh;
  }
 
-.catgame h1 a {
+.cat-game h1 {
   color: purple;
   animation-name: cat-text;
   animation-duration: 2s;
@@ -267,4 +267,20 @@ body .cat-game {
 .cat2 {
   background-image: url('../images/cat2.gif');
   background-size: 150px 150px;
+}
+
+.cat-game-link {
+  font-family: 'Caveat', cursive;
+  font-size: 40px;
+}
+
+.cat-game-link a {
+  text-decoration: none;
+  animation-name: cat-text;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+audio {
+  width: 200px;
 }
