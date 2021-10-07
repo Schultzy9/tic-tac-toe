@@ -17,6 +17,10 @@ let $player2CPU = 'The Machine';
 
 let gameOver = false;
 
+const ping1 = new Audio('audio/player1.wav');
+const ping2 = new Audio('audio/player2.wav')
+const machine = new Audio('audio/machinewins.wav');
+
 $(document).ready(function() {
 
 const saveScores = function () {
@@ -135,8 +139,10 @@ const computerTurn = function() {
   }
   $(`#${compChoice}`).text('');
   $(`#${compChoice}`).addClass('terminator');
+  $(`#${compChoice}`).addClass('O');
   if ($(`#${compChoice}`).hasClass('kitty') === true) {
     $(`#${compChoice}`).addClass('cat2');
+    $(`#${compChoice}`).addClass('O');
     $(`#${compChoice}`).text('');
   }
   gameBoard[number] = 'O';
@@ -170,7 +176,8 @@ const checkWin = function () {
        } else {
          if ($('#a1').hasClass('cpu')) {
            player2ScoreCPU = player2ScoreCPU + 1;
-           $('#winner').text(`Congratulations ${$player2CPU}!`);
+           $('#winner').text(`The Machine Wins!`);
+           machine.play();
          } else {
            player2Score = player2Score + 1;
            $('#winner').text(`Congratulations ${$player2}!`);
@@ -218,6 +225,7 @@ $('#clear').on('click', function() {
 $('.grid').on('click', function() {
   if ($(this).hasClass('X') !== true && $(this).hasClass('O') !== true) {
     if (player === 0) {
+      ping1.play();
       $(this).text('X');
       $(this).addClass('X');
       if ($(this).hasClass('kitty') === true) {
@@ -236,6 +244,7 @@ $('.grid').on('click', function() {
         computerTurn();
       }
     } else {
+      ping2.play();
       $(this).text('O');
       $(this).addClass('O');
       if ($(this).hasClass('kitty') === true) {
@@ -255,8 +264,5 @@ setPlayers();
 
 });
 
-//Make X and O buttons look better
-//Add sounds
 //README file
-//Local Storage
 //Smart AI
