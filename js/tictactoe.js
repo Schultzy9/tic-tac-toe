@@ -186,6 +186,7 @@ const checkWin = function () {
          gameCounter = 0;
          $('#winner').css('color', 'red');
          gameOver = true;
+         gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
          resetBoard();
        } else {
          if ($('#a1').hasClass('cpu')) {
@@ -199,6 +200,7 @@ const checkWin = function () {
          gameCounter = 0;
          $('#winner').css('color', 'green');
          gameOver = true;
+         gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
          resetBoard();
        }
   };
@@ -211,6 +213,7 @@ const checkWin = function () {
     gameCounter = 0;
     $('#winner').text(`Game is tied!`);
     $('#winner').css('color', 'purple');
+    gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
     gameOver = true;
     resetBoard();
   }
