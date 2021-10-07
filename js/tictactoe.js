@@ -4,54 +4,103 @@ let gameBoard = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3'];
 
 let player1Score = 0;
 let player2Score = 0;
+let player1ScoreCPU = 0;
+let player2ScoreCPU = 0;
 let tiedScore = 0;
+let tiedScoreCPU = 0;
 let gameCounter = 0;
 
 let $player1 = '';
 let $player2 = '';
+let $player1CPU = '';
+let $player2CPU = 'The Machine';
 
 let gameOver = false;
 
 $(document).ready(function() {
 
-const saveLocalStorage = function() {
-  localStorage.setItem('player 1', $player1);
-  localStorage.setItem('player 2', $player2);
-};
-
 const saveScores = function () {
-  localStorage.setItem('player1Score', player1Score);
-  localStorage.setItem('player2Score', player2Score);
-  localStorage.setItem('tiedScore', tiedScore);
+  if ($('#a1').hasClass('cpu')) {
+    localStorage.setItem('player1ScoreCPU', player1ScoreCPU);
+    localStorage.setItem('player2ScoreCPU', player2ScoreCPU);
+    localStorage.setItem('tiedScoreCPU', tiedScoreCPU);
+  } else {
+    localStorage.setItem('player1Score', player1Score);
+    localStorage.setItem('player2Score', player2Score);
+    localStorage.setItem('tiedScore', tiedScore);
+  }
 }
 
 const getScores = function () {
-  player1Score = parseInt(localStorage.getItem('player1Score', player1Score));
-  if ( isNaN(player1Score) === true) {
-    player1Score = 0;
+  if ($('#a1').hasClass('cpu')) {
+    player1ScoreCPU = parseInt(localStorage.getItem('player1ScoreCPU', player1ScoreCPU));
+    if ( isNaN(player1ScoreCPU) === true) {
+      player1ScoreCPU = 0;
+    }
+    player2ScoreCPU = parseInt(localStorage.getItem('player2ScoreCPU', player1ScoreCPU));
+    if ( isNaN(player2ScoreCPU) === true) {
+      player2ScoreCPU = 0;
+    }
+    tiedScoreCPU = parseInt(localStorage.getItem('tiedScoreCPU', tiedScoreCPU));
+    if ( isNaN(tiedScoreCPU) === true) {
+      tiedScoreCPU = 0;
+    }
+    $('#firstPlayerCPU').text($player1CPU + ': ' + player1ScoreCPU);
+    $('#secondPlayerCPU').text($player2CPU + ': ' + player2ScoreCPU)
+    $('#tiesCPU').text('Ties: ' + tiedScoreCPU);
+  } else {
+    player1Score = parseInt(localStorage.getItem('player1Score', player1Score));
+    if ( isNaN(player1Score) === true) {
+      player1Score = 0;
+    }
+    player2Score = parseInt(localStorage.getItem('player2Score', player1Score));
+    if ( isNaN(player2Score) === true) {
+      player2Score = 0;
+    }
+    tiedScore = parseInt(localStorage.getItem('tiedScore', tiedScore));
+    if ( isNaN(tiedScore) === true) {
+      tiedScore = 0;
+    }
+    $('#firstPlayer').text($player1 + ': ' + player1Score);
+    $('#secondPlayer').text($player2 + ': ' + player2Score)
+    $('#ties').text('Ties: ' + tiedScore);
   }
-  player2Score = parseInt(localStorage.getItem('player2Score', player1Score));
-  if ( isNaN(player2Score) === true) {
-    player2Score = 0;
-  }
-  tiedScore = parseInt(localStorage.getItem('tiedScore', tiedScore));
-  if ( isNaN(tiedScore) === true) {
-    tiedScore = 0;
+}
+
+const savePlayers = function() {
+  if ($('#a1').hasClass('cpu')) {
+    $player1CPU = $('#player1CPU').val();
+    localStorage.setItem('player 1CPU', $player1CPU);
+  } else {
+    $player1 = $('#player1').val();
+    $player2 = $('#player2').val();
+    localStorage.setItem('player 1', $player1);
+    localStorage.setItem('player 2', $player2);
   }
 }
 
 const setPlayers = function() {
-  if ($('#player1').val() === '') {
+  if ($('#a1').hasClass('cpu')) {
+    $player1CPU = localStorage.getItem('player 1CPU');
+    if ($player1CPU === null) {
+      $player1CPU = 'Player 1';
+    }
+    $('#firstPlayerCPU').text($player1CPU + ': ' + player1ScoreCPU);
+    $('#secondPlayerCPU').text($player2CPU + ': ' + player2ScoreCPU)
+    $('#tiesCPU').text('Ties: ' + tiedScoreCPU);
+  } else {
     $player1 = localStorage.getItem('player 1');
-  } else {
-    $player1 = $('#player1').val();
-  }
-  if ($('#player2').val() === '') {
+    if ($player1 === null) {
+      $player1 = 'Player 1';
+    }
     $player2 = localStorage.getItem('player 2');
-  } else {
-    $player2 = $('#player2').val();
+    if ($player2 === null) {
+      $player2 = 'Player 2';
+    }
+    $('#firstPlayer').text($player1 + ': ' + player1Score);
+    $('#secondPlayer').text($player2 + ': ' + player2Score)
+    $('#ties').text('Ties: ' + tiedScore);
   }
-  $('#winner').text('');
 }
 
 const resetBoard = function() {
@@ -65,6 +114,9 @@ const resetBoard = function() {
       computerTurn();
     }
   }, 1000);
+  setTimeout(function() {
+    $('#winner').text('');
+  }, 2000);
 };
 
 const checkCatGame = function () {
@@ -104,50 +156,66 @@ const checkWin = function () {
      gameBoard[6] === gameBoard[4] && gameBoard[6] === gameBoard[2]
      ) {
        if (player === 0) {
-         player1Score = player1Score + 1;
+         if ($('#a1').hasClass('cpu')) {
+           player1ScoreCPU = player1ScoreCPU + 1;
+           $('#winner').text(`Congratulations ${$player1CPU}!`);
+         } else {
+           player1Score = player1Score + 1;
+           $('#winner').text(`Congratulations ${$player1}!`);
+         }
          gameCounter = 0;
-         $('#winner').text(`Congratulations ${$player1}!`);
          $('#winner').css('color', 'red');
          gameOver = true;
          resetBoard();
        } else {
-         player2Score = player2Score + 1;
+         if ($('#a1').hasClass('cpu')) {
+           player2ScoreCPU = player2ScoreCPU + 1;
+           $('#winner').text(`Congratulations ${$player2CPU}!`);
+         } else {
+           player2Score = player2Score + 1;
+           $('#winner').text(`Congratulations ${$player2}!`);
+         }
          gameCounter = 0;
-         $('#winner').text(`Congratulations ${$player2}!`);
          $('#winner').css('color', 'green');
          gameOver = true;
          resetBoard();
        }
   };
   if (gameCounter === 9) {
-    tiedScore = tiedScore + 1;
+    if ($('#a1').hasClass('cpu')) {
+      tiedScoreCPU = tiedScoreCPU + 1;
+    } else {
+      tiedScore = tiedScore + 1
+    }
     gameCounter = 0;
     $('#winner').text(`Game is tied!`);
     $('#winner').css('color', 'purple');
     gameOver = true;
     resetBoard();
   }
-  $('#firstPlayer').text($player1 + ': ' + player1Score);
-  $('#secondPlayer').text($player2 + ': ' + player2Score)
-  $('#ties').text('Ties: ' + tiedScore);
+  getScores();
 };
 
+//Click the Save Names button
 $('#save').on('click', function () {
+  savePlayers();
   setPlayers();
-  saveLocalStorage();
+  checkCatGame();
 });
 
+//Click the Clear Scores button
 $('#clear').on('click', function() {
   localStorage.removeItem('player1Score');
   localStorage.removeItem('player2Score');
   localStorage.removeItem('tiedScore');
+  localStorage.removeItem('player1ScoreCPU');
+  localStorage.removeItem('player2ScoreCPU');
+  localStorage.removeItem('tiedScoreCPU');
+  getScores();
 })
 
 //Gameplay - Cicking on the board
 $('.grid').on('click', function() {
-  setPlayers();
-  getScores();
-  checkCatGame();
   if ($(this).hasClass('X') !== true && $(this).hasClass('O') !== true) {
     if (player === 0) {
       $(this).text('X');
@@ -182,10 +250,12 @@ $('.grid').on('click', function() {
   }
 });
 
+getScores();
+setPlayers();
+
 });
 
 //Make X and O buttons look better
-//Hover effects for navbar and buttons
 //Add sounds
 //README file
 //Local Storage
